@@ -15,17 +15,19 @@
 
 @implementation StreamController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+- (id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
     if (self) {
-        // Custom the table
+        // Customize the table
         
         // The className to query on
         self.parseClassName = @"Post";
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"text";
+        
+        // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
+        // self.imageKey = @"image";
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -44,7 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -112,7 +113,7 @@
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
 //    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.

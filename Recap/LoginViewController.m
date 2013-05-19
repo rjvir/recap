@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "ViewController.h"
+#import "BasicViewController.h"
 
 @interface LoginViewController ()
 
@@ -42,19 +42,49 @@
     [_loginLoader startAnimating];
     // Login PFUser using Facebook
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        [_loginLoader stopAnimating];
         if (!user) {
             if (!error) {
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else {
                 NSLog(@"Uh oh. An error occurred: %@", error);
             }
-        } else if (user.isNew) {
-            NSLog(@"User with facebook signed up and logged in!");
         } else {
-            // USER LOGGED IN!
-            NSLog(@"logged in!");
-            [self performSegueWithIdentifier:@"loadStream" sender:self];
+            NSLog(@"Data saved");
+            //NSString *facebookId = [user objectForKey:@"id"];
+            //NSLog(@"%@", facebookId);
+            PFObject *authData = [user objectForKey:@"profile"];
+            NSString *fbid = [authData objectForKey:@"facebookId"];
+            NSLog(@"%@", fbid);
+            
+            [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                
+                if (!error) {
+                    NSArray *data = [result objectForKey:@"data"];
+                    NSMutableArray *facebookIds = [[NSMutableArray alloc] initWithCapacity:data.count];
+                    for (NSDictionary *friendData in data) {
+                        [facebookIds addObject:[friendData objectForKey:@"id"]];
+                    }
+                    
+                    [[PFUser currentUser] setObject:facebookIds forKey:@"facebookFriends"];
+                    [[PFUser currentUser] setObject:fbid forKey:@"facebookId"];
+                    
+                    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        [_loginLoader stopAnimating];
+                        // We're in!
+                        NSLog(@"test");
+                        [self performSegueWithIdentifier:@"loadStream" sender:self];
+                    }];
+                } else {
+                    NSLog(@"Error");
+                }
+            }];
+            
+            if (user.isNew) {
+                NSLog(@"User with facebook signed up and logged in!");
+            } else {
+                // USER LOGGED IN!
+                NSLog(@"logged in!");
+            }
         }
     }];
 }

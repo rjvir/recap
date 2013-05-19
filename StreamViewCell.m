@@ -28,6 +28,11 @@
 
 - (void)dealloc {
     [_poster release];
+    [_poster release];
+    [_subject release];
+    [_text release];
+    [_subjectImage release];
+    [_image release];
     [super dealloc];
 }
 @end
