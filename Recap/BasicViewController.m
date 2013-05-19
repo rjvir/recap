@@ -11,7 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BasicViewController ()
-
+@property (nonatomic, retain) StreamViewCell *cell;
 @end
 
 @implementation BasicViewController
@@ -34,6 +34,8 @@
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
 
+    self.cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    
     [_streamLoader startAnimating];
     [self refresh:nil];
 }
@@ -96,6 +98,10 @@
     StreamViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.text.frame = CGRectMake(10,
+                                     360,
+                                     [cell.text.text sizeWithFont:cell.text.font].width,
+                                     [cell.text.text sizeWithFont:cell.text.font].height);
     }
 
 //    NSString *text = [self.cellArray objectAtIndex:indexPath.row];
@@ -116,13 +122,9 @@
         PFFile *file = [object objectForKey:@"image"];
         cell.image.file = file;
         [cell.image loadInBackground];
-//        cell.text.frame = CGRectMake(10,
-//                                 360,
-//                                 [cell.text.text sizeWithFont:cell.text.font].width,
-//                                 [cell.text.text sizeWithFont:cell.text.font].height);
     } else {
-        //cell.image = nil;
-        [cell.image removeFromSuperview];
+        cell.image = nil;
+        //[cell.image removeFromSuperview];
     }
     return cell;
     
@@ -135,10 +137,17 @@
     //    sv.lineBreakMode = UILineBreakModeWordWrap;
     //    sv.numberOfLines = 0;
     //    [sv sizeToFit];
-    int height = 200;
+    int height = 50;
     if([object objectForKey:@"image"]){
         height = height + 300;
     }
+    if([object objectForKey:@"text"]){
+        height = height + 100;
+    }
+    StreamViewCell *cell = self.cell;
+    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
+//    return MAX(h, 44.0f);
+//    height = height + h;
     return height;
 }
 
