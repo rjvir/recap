@@ -48,7 +48,6 @@
     
     NSLog(@"%@", [[PFUser currentUser] objectForKey:@"facebookId"]);
     
-    
     PFQuery *postsAboutMe = [PFQuery queryWithClassName:@"Post"];
     [postsAboutFriends whereKey:@"subject" equalTo:[[PFUser currentUser] objectForKey:@"facebookId"]];
 
@@ -114,7 +113,6 @@
     cell.subject.text = [object objectForKey:@"subjectName"];
     cell.text.text = [object objectForKey:@"text"];
     NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [object objectForKey:@"subject"]];
-    //UIImage *subjectImg = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:str]]];
     [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:nil] options:SDWebImageRefreshCached];
     //PFFile *subImg = [];
 //    cell.subjectImage.image = subjectImg;
@@ -122,12 +120,17 @@
         PFFile *file = [object objectForKey:@"image"];
         cell.image.file = file;
         [cell.image loadInBackground];
+        [cell.image setFrame:CGRectMake(10.0, 50.0, 200.0, 200.0)];
     } else {
         cell.image = nil;
         //[cell.image removeFromSuperview];
     }
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(StreamViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,8 +147,8 @@
     if([object objectForKey:@"text"]){
         height = height + 100;
     }
-    StreamViewCell *cell = self.cell;
-    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
+//    StreamViewCell *cell = self.cell;
+//    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
 //    return MAX(h, 44.0f);
 //    height = height + h;
     return height;

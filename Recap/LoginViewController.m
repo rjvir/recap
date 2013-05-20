@@ -55,6 +55,7 @@
             //NSLog(@"%@", facebookId);
             [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
+                    PFObject *profile = result;
                     NSString *fbid = [result objectForKey:@"id"];
                     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         
@@ -67,6 +68,7 @@
                             
                             [[PFUser currentUser] setObject:facebookIds forKey:@"facebookFriends"];
                             [[PFUser currentUser] setObject:fbid forKey:@"facebookId"];
+                            [[PFUser currentUser] setObject:profile forKey:@"profile"];
                             
                             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                 [_loginLoader stopAnimating];
