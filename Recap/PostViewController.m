@@ -36,8 +36,12 @@
     self.captionLabel.text = self.placeholderText;
     self.captionLabel.textColor = [UIColor lightGrayColor]; //optional
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     
 }
+
 - (IBAction)buttonPressed:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -190,68 +194,70 @@
     return YES;
 }
 
-- (IBAction)cameraButtonPressed:(id)sender {
-    NSLog(@"BP!");
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeCamera] == YES){
-        // Create image picker controller
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        
-        // Set source to the camera
-        imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
-        imagePicker.allowsEditing = YES;
-//        UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(showCamera:)];
-//        imagePicker.navigationItem.rightBarButtonItems = [NSArray arrayWithObject:button];
-        UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary:)];
-        imagePicker.navigationItem.leftBarButtonItems = [NSArray arrayWithObject:button];
-        imagePicker.navigationItem.title = @"Take Photo";
-        imagePicker.navigationController.navigationBarHidden = NO; //        // Delegate is self
-        imagePicker.delegate = self;
-        
-        // Show image picker
-        [self presentViewController:imagePicker animated:YES completion:nil];
-//        [self presentModalViewController:imagePicker animated:YES];
-    } else {
-        NSLog(@"yo!");
-    }
-}
-
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSLog(@"picked!");
-//    // Access the uncropped image from info dictionary
-    UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    self.postImage.image = image;
+//- (IBAction)cameraButtonPressed:(id)sender {
+//    NSLog(@"BP!");
+//    if ([UIImagePickerController isSourceTypeAvailable:
+//         UIImagePickerControllerSourceTypeCamera] == YES){
+//        // Create image picker controller
+//        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//        
+//        // Set source to the camera
+//        imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+//        imagePicker.allowsEditing = YES;
+////        UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(showCamera:)];
+////        imagePicker.navigationItem.rightBarButtonItems = [NSArray arrayWithObject:button];
+//        UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary:)];
+//        imagePicker.navigationItem.leftBarButtonItems = [NSArray arrayWithObject:button];
+//        imagePicker.navigationItem.title = @"Take Photo";
+//        imagePicker.navigationController.navigationBarHidden = NO; //        // Delegate is self
+//        imagePicker.delegate = self;
+//        
+//        // Show image picker
+//        [self presentViewController:imagePicker animated:YES completion:nil];
+////        [self presentModalViewController:imagePicker animated:YES];
+//    } else {
+//        NSLog(@"yo!");
+//    }
+//}
 //
-//    // Dismiss controller
-    [picker dismissViewControllerAnimated:YES completion:nil];
 //
-//    // Resize image
-//    UIGraphicsBeginImageContext(CGSizeMake(640, 960));
-//    [image drawInRect: CGRectMake(0, 0, 640, 960)];
-//    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    // Upload image
-//    NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
-//    [self uploadImage:imageData];
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    NSLog(@"picked!");
+////    // Access the uncropped image from info dictionary
+//    UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+//    self.postImage.image = image;
+////
+////    // Dismiss controller
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+////
+////    // Resize image
+////    UIGraphicsBeginImageContext(CGSizeMake(640, 960));
+////    [image drawInRect: CGRectMake(0, 0, 640, 960)];
+////    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+////    UIGraphicsEndImageContext();
+////    
+////    // Upload image
+////    NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
+////    [self uploadImage:imageData];
+//
+//}
 
-}
 - (IBAction)postButtonPressed:(id)sender {
     NSLog(@"Pressed");
     // get image, get friend, get text, get current user
-    if(self.postImage.image || !([self.captionLabel.text isEqualToString:self.placeholderText] || [self.captionLabel.text isEqual: @""])){
+    /* self.postImage.image || */ 
+    if(!([self.captionLabel.text isEqualToString:self.placeholderText] || [self.captionLabel.text isEqual: @""])){
         NSLog(@"valid");
         PFObject *post = [PFObject objectWithClassName:@"Post"];
-        PFFile *imageFile = [PFFile fileWithName:@"image.jpg" data:UIImageJPEGRepresentation(self.postImage.image, 0.05f)];
-        if(!([self.captionLabel.text isEqualToString:self.placeholderText] || [self.captionLabel.text isEqual: @""])){
-            [post setObject:self.captionLabel.text forKey:@"text"];
-        }
+        //PFFile *imageFile = [PFFile fileWithName:@"image.jpg" data:UIImageJPEGRepresentation(self.postImage.image, 0.05f)];
+        //if(!([self.captionLabel.text isEqualToString:self.placeholderText] || [self.captionLabel.text isEqual: @""])){
+        //}
+        [post setObject:self.captionLabel.text forKey:@"text"];
         PFUser *user = [PFUser currentUser];
         [post setObject:user forKey:@"poster"];
-        [post setObject:imageFile forKey:@"image"];
+        //[post setObject:imageFile forKey:@"image"];
         [post setObject:self.userid forKey:@"subject"];
         [post setObject:self.name forKey:@"subjectName"];
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -269,6 +275,13 @@
         }];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
+                                                        message:@"Please try again."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
         NSLog(@"invalid");
     }
 

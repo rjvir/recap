@@ -15,7 +15,7 @@ UITableViewDelegate, FBFriendPickerDelegate, UINavigationControllerDelegate, UII
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 @property (retain, nonatomic) UISearchBar *searchBar;
 @property (retain, nonatomic) NSString *searchText;
-@property (retain, nonatomic) NSString *name;
+//@property (retain, nonatomic) NSString *name;
 @property (retain, nonatomic) NSString *userid;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (retain, nonatomic) IBOutlet UIImageView *profileImage;
@@ -23,4 +23,5 @@ UITableViewDelegate, FBFriendPickerDelegate, UINavigationControllerDelegate, UII
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *postButton;
 @property (retain, nonatomic) IBOutlet UITextView *captionLabel;
 @property (retain, nonatomic) NSString *placeholderText;
+@property (retain, nonatomic) NSArray *subject;
 @end

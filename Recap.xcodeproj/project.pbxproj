@@ -35,6 +35,8 @@
 		7169AA64173A2FCA001345AE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7169AA63173A2FCA001345AE /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		71A081FC17483A1D00B4EA5D /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A081FB17483A1D00B4EA5D /* SDWebImage.framework */; };
 		71A081FE17483A5600B4EA5D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A081FD17483A5600B4EA5D /* ImageIO.framework */; };
+		71A0823B174AB55200B4EA5D /* friendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A0823A174AB55100B4EA5D /* friendPickerViewController.m */; };
+		71A0823D174AD14600B4EA5D /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A0823C174AD14600B4EA5D /* loading.png */; };
 		71A78E0217414BB5000DCDC8 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A78E0117414BB5000DCDC8 /* BasicViewController.m */; };
 		71A78E051741A278000DCDC8 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A78E041741A278000DCDC8 /* PostViewController.m */; };
 		71BD3FB81735B17E000257D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BD3FB71735B17E000257D7 /* UIKit.framework */; };
@@ -83,6 +85,9 @@
 		7169AA63173A2FCA001345AE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		71A081FB17483A1D00B4EA5D /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		71A081FD17483A5600B4EA5D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		71A08239174AB55100B4EA5D /* friendPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = friendPickerViewController.h; sourceTree = "<group>"; };
+		71A0823A174AB55100B4EA5D /* friendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = friendPickerViewController.m; sourceTree = "<group>"; };
+		71A0823C174AD14600B4EA5D /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 		71A78E0017414BB5000DCDC8 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
 		71A78E0117414BB5000DCDC8 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
 		71A78E031741A278000DCDC8 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				7169AA2B17362C9F001345AE /* square.png */,
+				71A0823C174AD14600B4EA5D /* loading.png */,
 				71BD3FDA1735B26B000257D7 /* logo.png */,
 				7169AA2D17363065001345AE /* button.png */,
 				7169AA3D1739B846001345AE /* LoginViewController.h */,
@@ -200,6 +206,8 @@
 				71BD3FCF1735B17E000257D7 /* MainStoryboard.storyboard */,
 				71A78E031741A278000DCDC8 /* PostViewController.h */,
 				71A78E041741A278000DCDC8 /* PostViewController.m */,
+				71A08239174AB55100B4EA5D /* friendPickerViewController.h */,
+				71A0823A174AB55100B4EA5D /* friendPickerViewController.m */,
 				71A78E0017414BB5000DCDC8 /* BasicViewController.h */,
 				71A78E0117414BB5000DCDC8 /* BasicViewController.m */,
 				71620AAD173EC09200491C81 /* StreamViewCell.h */,
@@ -291,6 +299,7 @@
 				7169AA3A1736DF38001345AE /* splash-logo.png in Resources */,
 				7169AA3C1736E172001345AE /* header.png in Resources */,
 				7169AA5C173A1BE1001345AE /* FacebookSDKResources.bundle in Resources */,
+				71A0823D174AD14600B4EA5D /* loading.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +317,7 @@
 				71620AB5173F01BD00491C81 /* StreamController.m in Sources */,
 				71A78E0217414BB5000DCDC8 /* BasicViewController.m in Sources */,
 				71A78E051741A278000DCDC8 /* PostViewController.m in Sources */,
+				71A0823B174AB55200B4EA5D /* friendPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

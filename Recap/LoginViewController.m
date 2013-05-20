@@ -28,6 +28,11 @@
 {
     [super viewDidLoad];
     NSLog(@"View did load");
+    NSRange r = [[@"hello ABC" lowercaseString] rangeOfString:[@"asBc" lowercaseString]];
+    if(r.location != NSNotFound) {
+        NSLog(@"exists!");
+    }
+
 	// Do any additional setup after loading the view.
 }
 
@@ -37,7 +42,7 @@
 //    [testObject setObject:@"bar" forKey:@"foo"];
 //    [testObject save];
 
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    NSArray *permissionsArray = @[];
     
     [_loginLoader startAnimating];
     // Login PFUser using Facebook
@@ -62,9 +67,17 @@
                         if (!error) {
                             NSArray *data = [result objectForKey:@"data"];
                             NSMutableArray *facebookIds = [[NSMutableArray alloc] initWithCapacity:data.count];
+                            NSMutableArray *facebookFriends = [[NSMutableArray alloc] initWithCapacity:data.count];
                             for (NSDictionary *friendData in data) {
                                 [facebookIds addObject:[friendData objectForKey:@"id"]];
+                                [facebookFriends addObject:[NSMutableArray arrayWithObjects:[friendData objectForKey:@"id"],[friendData objectForKey:@"name"],nil]];
                             }
+
+                            
+                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                            NSData *fbFriends = [NSKeyedArchiver archivedDataWithRootObject:facebookFriends];
+                            [defaults setObject:facebookFriends forKey:@"facebookFriends"];
+                            [defaults synchronize];
                             
                             [[PFUser currentUser] setObject:facebookIds forKey:@"facebookFriends"];
                             [[PFUser currentUser] setObject:fbid forKey:@"facebookId"];
@@ -72,9 +85,13 @@
                             
                             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                 [_loginLoader stopAnimating];
-                                // We're in!
-                                NSLog(@"test");
-                                [self performSegueWithIdentifier:@"loadStream" sender:self];
+                                if (user.isNew) {
+                                    [self performSegueWithIdentifier:@"loadOnboarding" sender:self];
+                                } else {
+                                    [self performSegueWithIdentifier:@"loadStream" sender:self];
+                                    // USER LOGGED IN!
+                                }
+
                             }];
                         } else {
                             NSLog(@"Error");
@@ -82,13 +99,7 @@
                     }];
                 }
             }];
-                        
-            if (user.isNew) {
-                NSLog(@"User with facebook signed up and logged in!");
-            } else {
-                // USER LOGGED IN!
-                NSLog(@"logged in!");
-            }
+
         }
     }];
 }

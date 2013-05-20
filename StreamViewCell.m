@@ -32,7 +32,7 @@
     [_subject release];
     [_text release];
     [_subjectImage release];
-    [_image release];
+//    [_image release];
     [super dealloc];
 }
 @end

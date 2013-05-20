@@ -33,8 +33,6 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
-
-    self.cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     
     [_streamLoader startAnimating];
     [self refresh:nil];
@@ -116,15 +114,15 @@
     [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:nil] options:SDWebImageRefreshCached];
     //PFFile *subImg = [];
 //    cell.subjectImage.image = subjectImg;
-    if([object objectForKey:@"image"]){
-        PFFile *file = [object objectForKey:@"image"];
-        cell.image.file = file;
-        [cell.image loadInBackground];
-        [cell.image setFrame:CGRectMake(10.0, 50.0, 200.0, 200.0)];
-    } else {
-        cell.image = nil;
-        //[cell.image removeFromSuperview];
-    }
+//    if([object objectForKey:@"image"]){
+//        PFFile *file = [object objectForKey:@"image"];
+//        cell.image.file = file;
+//        [cell.image loadInBackground];
+//        [cell.image setFrame:CGRectMake(10.0, 50.0, 200.0, 200.0)];
+//    } else {
+//        cell.image = nil;
+//        //[cell.image removeFromSuperview];
+//    }
     return cell;
     
 }
@@ -142,7 +140,7 @@
     //    [sv sizeToFit];
     int height = 50;
     if([object objectForKey:@"image"]){
-        height = height + 300;
+//        height = height + 300;
     }
     if([object objectForKey:@"text"]){
         height = height + 100;
