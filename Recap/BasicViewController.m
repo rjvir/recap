@@ -29,8 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.cellArray = [[NSMutableArray alloc] initWithObjects:@"one", @"two", @"three", nil];
 
+    self.cell = [StreamViewCell alloc];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
@@ -123,26 +123,24 @@
 {
     static NSString *CellIdentifier = @"Cell";
     StreamViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
     if (cell == nil) {
         cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
+    cell.text.text = [object objectForKey:@"text"];
+    [cell.text sizeToFit];
     PFUser *poster = (PFUser *)[object objectForKey:@"poster"];
     PFObject *posterData = [poster objectForKey:@"profile"];
     NSString *posterName = [posterData objectForKey:@"name"];
     cell.subject.text = [object objectForKey:@"subjectName"];
     cell.poster.text = [NSString stringWithFormat:@"via %@", posterName];
-    cell.text.text = [object objectForKey:@"text"];
-//    cell.detailLabel.text = [NSString stringWithFormat:@"via %@", posterName];
-//    cell.subject.text = [object objectForKey:@"subjectName"];
-//    cell.text.text = [object objectForKey:@"text"];
+
     NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200&height=200", [object objectForKey:@"subject"]];
     [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
     CALayer * l = [cell.subjectImage layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:5.0];
-//    [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
     return cell;
 }
 
@@ -150,26 +148,13 @@
 //    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
-//    //NSString *text = [object objectForKey:@"text"];
-//    //    sv.text =  @"When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.";
-//    //    sv.lineBreakMode = UILineBreakModeWordWrap;
-//    //    sv.numberOfLines = 0;
-//    //    [sv sizeToFit];
-//    int height = 100;
-//    if([object objectForKey:@"image"]){
-////        height = height + 300;
-//    }
-//    if([object objectForKey:@"text"]){
-//        height = height + 100 - 100;
-//    }
-////    StreamViewCell *cell = self.cell;
-////    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
-////    return MAX(h, 44.0f);
-////    height = height + h;
-//    return height;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
+
+    CGSize maximumLabelSize = CGSizeMake(232,232); //Or whatever size you need to be the max
+    CGSize expectedLabelSize = [[object objectForKey:@"text"] sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:maximumLabelSize lineBreakMode: NSLineBreakByWordWrapping];
+    return (46 + expectedLabelSize.height);
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

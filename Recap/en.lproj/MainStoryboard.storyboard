@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IuV-90-kPs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4Ib-7m-haO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -66,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIr-YQ-Kcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-273" y="-14"/>
+            <point key="canvasLocation" x="-573" y="-50"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="PhC-6x-igz">
@@ -166,10 +166,10 @@
                                                         <constraint firstAttribute="height" constant="48" id="zI9-97-xCN"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="I'm a dumbass" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KH-5J-P5e">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" text="I'm a dumbass" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="232" translatesAutoresizingMaskIntoConstraints="NO" id="9KH-5J-P5e">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="232" id="BEp-Zw-BUB"/>
-                                                        <constraint firstAttribute="height" constant="20" id="Vs6-TK-blc"/>
+                                                        <constraint firstAttribute="height" constant="23" id="TzG-2X-K3g"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -178,7 +178,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ri-Vt-C9n">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="181" id="2v5-xu-hu3"/>
-                                                        <constraint firstAttribute="height" constant="21" id="tc7-jK-0MT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -189,12 +188,13 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="0oD-BA-al1" firstAttribute="centerY" secondItem="3ve-oX-LnD" secondAttribute="centerY" type="default" id="1e4-pj-irC"/>
                                             <constraint firstItem="0oD-BA-al1" firstAttribute="leading" secondItem="3ve-oX-LnD" secondAttribute="leading" constant="7" id="51t-Fp-SVd"/>
                                             <constraint firstItem="z3s-t2-Dxd" firstAttribute="leading" secondItem="0oD-BA-al1" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="9tk-2U-HT0"/>
-                                            <constraint firstItem="4ri-Vt-C9n" firstAttribute="top" secondItem="3ve-oX-LnD" secondAttribute="top" constant="8" id="NV6-Ml-C2K"/>
-                                            <constraint firstItem="z3s-t2-Dxd" firstAttribute="top" secondItem="3ve-oX-LnD" secondAttribute="top" constant="9" id="Q1V-i8-ZbX"/>
-                                            <constraint firstAttribute="bottom" secondItem="9KH-5J-P5e" secondAttribute="bottom" constant="11" id="XDI-7X-SQq"/>
+                                            <constraint firstItem="0oD-BA-al1" firstAttribute="top" secondItem="3ve-oX-LnD" secondAttribute="top" constant="8" id="Ofv-wt-gv1"/>
+                                            <constraint firstItem="9KH-5J-P5e" firstAttribute="top" secondItem="3ve-oX-LnD" secondAttribute="top" constant="31" id="Vwl-Ee-kE1"/>
+                                            <constraint firstItem="z3s-t2-Dxd" firstAttribute="top" secondItem="0oD-BA-al1" secondAttribute="top" type="default" id="Ytg-XQ-dsQ"/>
+                                            <constraint firstItem="z3s-t2-Dxd" firstAttribute="top" secondItem="4ri-Vt-C9n" secondAttribute="top" type="default" id="hRE-UW-0AU"/>
+                                            <constraint firstItem="z3s-t2-Dxd" firstAttribute="bottom" secondItem="4ri-Vt-C9n" secondAttribute="bottom" type="default" id="jz4-EX-krs"/>
                                             <constraint firstItem="9KH-5J-P5e" firstAttribute="leading" secondItem="0oD-BA-al1" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xrK-ER-m4r"/>
                                             <constraint firstItem="4ri-Vt-C9n" firstAttribute="leading" secondItem="3ve-oX-LnD" secondAttribute="leading" constant="130" id="xt1-AE-3kt"/>
                                         </constraints>
@@ -258,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPD-4u-d4s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499" y="-192"/>
+            <point key="canvasLocation" x="1175" y="-144"/>
         </scene>
         <!--Friend Picker View Controller-->
         <scene sceneID="XhO-dX-si0">
@@ -335,7 +335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Svo-YA-gmF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="997" y="-50"/>
+            <point key="canvasLocation" x="7" y="380"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="Gr3-gH-edV">
@@ -411,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e69-ya-w2L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537" y="-89"/>
+            <point key="canvasLocation" x="585" y="-531"/>
         </scene>
     </scenes>
     <resources>
@@ -470,6 +470,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MZB-99-yW6"/>
+        <segue reference="OSk-Pv-kJA"/>
     </inferredMetricsTieBreakers>
 </document>
