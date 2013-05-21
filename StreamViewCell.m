@@ -27,12 +27,10 @@
 }
 
 - (void)dealloc {
-    [_poster release];
-    [_poster release];
     [_subject release];
     [_text release];
     [_subjectImage release];
-//    [_image release];
+    [_poster release];
     [super dealloc];
 }
 @end

@@ -9,6 +9,7 @@
 #import "BasicViewController.h"
 #import "StreamViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface BasicViewController ()
 @property (nonatomic, retain) StreamViewCell *cell;
@@ -93,68 +94,82 @@
     return [self.cellArray count];
 }
 
+//- (StreamViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellIdentifier = @"Cell";
+//    StreamViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//        cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell.text.frame = CGRectMake(10,
+//                                     360,
+//                                     [cell.text.text sizeWithFont:cell.text.font].width,
+//                                     [cell.text.text sizeWithFont:cell.text.font].height);
+//    }
+//
+//    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
+//    PFUser *poster = (PFUser *)[object objectForKey:@"poster"];
+//    PFObject *posterData = [poster objectForKey:@"profile"];
+//    NSString *posterName = [posterData objectForKey:@"name"];
+//    //cell.subject.text = [object objectForKey:@"subjectName"];
+//    cell.poster.text = [NSString stringWithFormat:@"via %@", posterName];
+//    cell.subject.text = [object objectForKey:@"subjectName"];
+//    cell.text.text = [object objectForKey:@"text"];
+//    NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [object objectForKey:@"subject"]];
+//    [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
+//    return cell;
+//}
+
 - (StreamViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     StreamViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[StreamViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.text.frame = CGRectMake(10,
-                                     360,
-                                     [cell.text.text sizeWithFont:cell.text.font].width,
-                                     [cell.text.text sizeWithFont:cell.text.font].height);
     }
-
-//    NSString *text = [self.cellArray objectAtIndex:indexPath.row];
+    
     PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
     PFUser *poster = (PFUser *)[object objectForKey:@"poster"];
     PFObject *posterData = [poster objectForKey:@"profile"];
     NSString *posterName = [posterData objectForKey:@"name"];
-    //cell.subject.text = [object objectForKey:@"subjectName"];
-    cell.poster.text = [NSString stringWithFormat:@"via %@", posterName];
     cell.subject.text = [object objectForKey:@"subjectName"];
+    cell.poster.text = [NSString stringWithFormat:@"via %@", posterName];
     cell.text.text = [object objectForKey:@"text"];
-    NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [object objectForKey:@"subject"]];
+//    cell.detailLabel.text = [NSString stringWithFormat:@"via %@", posterName];
+//    cell.subject.text = [object objectForKey:@"subjectName"];
+//    cell.text.text = [object objectForKey:@"text"];
+    NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200&height=200", [object objectForKey:@"subject"]];
     [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
-    //PFFile *subImg = [];
-//    cell.subjectImage.image = subjectImg;
-//    if([object objectForKey:@"image"]){
-//        PFFile *file = [object objectForKey:@"image"];
-//        cell.image.file = file;
-//        [cell.image loadInBackground];
-//        [cell.image setFrame:CGRectMake(10.0, 50.0, 200.0, 200.0)];
-//    } else {
-//        cell.image = nil;
-//        //[cell.image removeFromSuperview];
-//    }
+    CALayer * l = [cell.subjectImage layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:5.0];
+//    [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(StreamViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
-    //NSString *text = [object objectForKey:@"text"];
-    //    sv.text =  @"When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.";
-    //    sv.lineBreakMode = UILineBreakModeWordWrap;
-    //    sv.numberOfLines = 0;
-    //    [sv sizeToFit];
-    int height = 100;
-    if([object objectForKey:@"image"]){
-//        height = height + 300;
-    }
-    if([object objectForKey:@"text"]){
-        height = height + 100 - 100;
-    }
-//    StreamViewCell *cell = self.cell;
-//    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
-//    return MAX(h, 44.0f);
-//    height = height + h;
-    return height;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    PFObject *object = [self.cellArray objectAtIndex:indexPath.row];
+//    //NSString *text = [object objectForKey:@"text"];
+//    //    sv.text =  @"When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.";
+//    //    sv.lineBreakMode = UILineBreakModeWordWrap;
+//    //    sv.numberOfLines = 0;
+//    //    [sv sizeToFit];
+//    int height = 100;
+//    if([object objectForKey:@"image"]){
+////        height = height + 300;
+//    }
+//    if([object objectForKey:@"text"]){
+//        height = height + 100 - 100;
+//    }
+////    StreamViewCell *cell = self.cell;
+////    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
+////    return MAX(h, 44.0f);
+////    height = height + h;
+//    return height;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -171,6 +186,7 @@
 - (void)dealloc {
     [_tableView release];
     [_streamLoader release];
+    [_subject release];
     [super dealloc];
 }
 @end

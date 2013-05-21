@@ -142,7 +142,7 @@
         NSRange r = [[[name objectAtIndex:1] lowercaseString] rangeOfString:[searchText lowercaseString]];
         if(r.location != NSNotFound)
         {
-            if(0 || r.location== 0)//that is we are checking only the start of the names.
+            if([searchText length] >= 3 || r.location== 0)//that is we are checking only the start of the names.
             {
                 [self.friendArray addObject:name];
             }

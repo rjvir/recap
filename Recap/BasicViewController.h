@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSArray *cellArray;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *streamLoader;
+@property (retain, nonatomic) IBOutlet UILabel *subject;
 
 @end

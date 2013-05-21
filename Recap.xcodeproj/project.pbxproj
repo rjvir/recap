@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		71620AAF173EC09200491C81 /* StreamViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71620AAE173EC09200491C81 /* StreamViewCell.m */; };
-		71620AB5173F01BD00491C81 /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71620AB4173F01BD00491C81 /* StreamController.m */; };
 		7169AA2C17362C9F001345AE /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 7169AA2B17362C9F001345AE /* square.png */; };
 		7169AA2E17363065001345AE /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7169AA2D17363065001345AE /* button.png */; };
 		7169AA351736389B001345AE /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 7169AA331736389B001345AE /* comment.png */; };
@@ -57,8 +56,6 @@
 /* Begin PBXFileReference section */
 		71620AAD173EC09200491C81 /* StreamViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamViewCell.h; path = ../StreamViewCell.h; sourceTree = "<group>"; };
 		71620AAE173EC09200491C81 /* StreamViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamViewCell.m; path = ../StreamViewCell.m; sourceTree = "<group>"; };
-		71620AB3173F01BD00491C81 /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamController.h; sourceTree = "<group>"; };
-		71620AB4173F01BD00491C81 /* StreamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamController.m; sourceTree = "<group>"; };
 		7169AA2B17362C9F001345AE /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
 		7169AA2D17363065001345AE /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		7169AA331736389B001345AE /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
@@ -215,8 +212,6 @@
 				71A78E0117414BB5000DCDC8 /* BasicViewController.m */,
 				71620AAD173EC09200491C81 /* StreamViewCell.h */,
 				71620AAE173EC09200491C81 /* StreamViewCell.m */,
-				71620AB3173F01BD00491C81 /* StreamController.h */,
-				71620AB4173F01BD00491C81 /* StreamController.m */,
 				71BD3FBE1735B17E000257D7 /* Supporting Files */,
 			);
 			path = Recap;
@@ -318,7 +313,6 @@
 				71BD3FC81735B17E000257D7 /* AppDelegate.m in Sources */,
 				7169AA3F1739B847001345AE /* LoginViewController.m in Sources */,
 				71620AAF173EC09200491C81 /* StreamViewCell.m in Sources */,
-				71620AB5173F01BD00491C81 /* StreamController.m in Sources */,
 				71A78E0217414BB5000DCDC8 /* BasicViewController.m in Sources */,
 				71A78E051741A278000DCDC8 /* PostViewController.m in Sources */,
 				71A0823B174AB55200B4EA5D /* friendPickerViewController.m in Sources */,
