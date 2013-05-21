@@ -8,7 +8,7 @@
 
 #import "friendPickerViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "PostViewController.h";
+#import "PostViewController.h"
 
 @interface friendPickerViewController ()
 
@@ -44,7 +44,6 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     [self.searchBar becomeFirstResponder];
 }
 
@@ -170,6 +169,7 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    [self.searchBar resignFirstResponder];
     [self performSegueWithIdentifier:@"loadForm" sender:self];
 }
 
@@ -179,7 +179,8 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSArray *object = self.friendArray[indexPath.row];
         PostViewController *postView = (PostViewController *)segue.destinationViewController;
-        postView.subject = object;
+        postView.name = [object objectAtIndex:1];
+        postView.userid = [object objectAtIndex:0];
     }
 }
 

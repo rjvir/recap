@@ -91,7 +91,6 @@
                                     [self performSegueWithIdentifier:@"loadStream" sender:self];
                                     // USER LOGGED IN!
                                 }
-
                             }];
                         } else {
                             NSLog(@"Error");
@@ -99,7 +98,6 @@
                     }];
                 }
             }];
-
         }
     }];
 }

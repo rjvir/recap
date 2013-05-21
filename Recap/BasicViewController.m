@@ -38,6 +38,10 @@
     [self refresh:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self refresh:nil];    
+}
+
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
     
@@ -111,7 +115,7 @@
     cell.subject.text = [object objectForKey:@"subjectName"];
     cell.text.text = [object objectForKey:@"text"];
     NSString *str =[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [object objectForKey:@"subject"]];
-    [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:nil] options:SDWebImageRefreshCached];
+    [cell.subjectImage setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"loading.png"] options:SDWebImageRefreshCached];
     //PFFile *subImg = [];
 //    cell.subjectImage.image = subjectImg;
 //    if([object objectForKey:@"image"]){
@@ -138,12 +142,12 @@
     //    sv.lineBreakMode = UILineBreakModeWordWrap;
     //    sv.numberOfLines = 0;
     //    [sv sizeToFit];
-    int height = 50;
+    int height = 100;
     if([object objectForKey:@"image"]){
 //        height = height + 300;
     }
     if([object objectForKey:@"text"]){
-        height = height + 100;
+        height = height + 100 - 100;
     }
 //    StreamViewCell *cell = self.cell;
 //    CGFloat h = 24 + [@"text" sizeWithFont:cell.text.font constrainedToSize: (CGSize){cell.text.frame.size.width, CGFLOAT_MAX} lineBreakMode:cell.text.lineBreakMode].height;
